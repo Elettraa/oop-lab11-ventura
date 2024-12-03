@@ -10,11 +10,13 @@ public final class Test {
     }
 
     /*
-     * Realizzare una classe AnotherConcurrentGUI con costruttore privo di argomenti,
+     * Realizzare una classe AnotherConcurrentGUI con costruttore privo di
+     * argomenti,
      * che aggiunga all'esercizio precedente la seguente funzionalità:
-     * - dopo 10 secondi dalla partenza dell'applicazione, i pulsanti si disabilitino
-     *   e il conteggio si fermi comunque.
-     *   - fare attenzione a non creare corse critiche
+     * - dopo 10 secondi dalla partenza dell'applicazione, i pulsanti si
+     * disabilitino
+     * e il conteggio si fermi comunque.
+     * - fare attenzione a non creare corse critiche
      *
      * Suggerimenti:
      * - si usi un ulteriore agente...
@@ -24,7 +26,7 @@ public final class Test {
     /**
      * 
      * @param args
-     *            unused
+     *             unused
      * 
      */
     public static void main(final String... args) {
