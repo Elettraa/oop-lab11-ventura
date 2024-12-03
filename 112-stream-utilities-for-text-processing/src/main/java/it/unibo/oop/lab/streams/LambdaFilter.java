@@ -6,7 +6,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.Toolkit;
+import java.util.Comparator;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -27,7 +30,8 @@ import javax.swing.JTextArea;
  *
  * 4) List all the words in alphabetical order
  * 
- * 5) Write the count for each word, e.g. "word word pippo" should output "pippo -> 1 word -> 2"
+ * 5) Write the count for each word, e.g. "word word pippo" should output "pippo
+ * -> 1 word -> 2"
  *
  */
 public final class LambdaFilter extends JFrame {
@@ -38,7 +42,20 @@ public final class LambdaFilter extends JFrame {
         /**
          * Commands.
          */
-        IDENTITY("No modifications", Function.identity());
+        IDENTITY("No modifications", Function.identity()),
+        LOWERCASE("Convert to Lowercase", String::toLowerCase),
+        COUNTCHARS("Count the number of chars", s -> Integer.toString(s.length())),
+        COUNTLINES("Count the number of lines", s -> Integer.toString((int) s.lines().count())),
+        ALPHORDER("Sort words in aplhabetical order",
+                s -> Stream.of(s.split("[\\s]"))
+                        .sorted(Comparator.comparing(String::toLowerCase))
+                        .collect(Collectors.joining("\n"))),
+        WORDCOUNTER("Write the count for each word",
+                s -> Stream.of(s.split("[\\s]"))
+                        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                        .entrySet().stream()
+                        .map(a -> a.getKey() + " -> " + a.getValue())
+                        .collect(Collectors.joining("\n")));
 
         private final String commandName;
         private final Function<String, String> fun;
@@ -60,7 +77,7 @@ public final class LambdaFilter extends JFrame {
 
     private LambdaFilter() {
         super("Lambda filter GUI");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         final JPanel panel1 = new JPanel();
         final LayoutManager layout = new BorderLayout();
         panel1.setLayout(layout);
