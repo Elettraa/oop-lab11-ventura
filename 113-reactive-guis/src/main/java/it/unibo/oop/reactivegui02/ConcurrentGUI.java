@@ -43,7 +43,14 @@ public final class ConcurrentGUI extends JFrame {
         final Agent agent = new Agent();
         new Thread(agent).start();
 
-        stop.addActionListener((e) -> agent.stopCounting());
+        stop.addActionListener((e) -> {
+            agent.stopCounting();
+            SwingUtilities.invokeLater(() -> {
+                up.setEnabled(false);
+                down.setEnabled(false);
+                stop.setEnabled(false);
+            });
+        });
         up.addActionListener((e) -> agent.countUpwards());
         down.addActionListener((e) -> agent.countDownwards());
 
@@ -96,7 +103,6 @@ public final class ConcurrentGUI extends JFrame {
          */
         public void stopCounting() {
             this.stop = true;
-            setEnabled(countingUp);
         }
 
         /**
