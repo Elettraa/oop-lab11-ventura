@@ -14,7 +14,7 @@ public final class MultiThreadedListSumClassic implements SumList {
     /**
      * 
      * @param nthread
-     *            no. of thread performing the sum.
+     *                no. of thread performing the sum.
      */
     public MultiThreadedListSumClassic(final int nthread) {
         this.nthread = nthread;
@@ -30,11 +30,11 @@ public final class MultiThreadedListSumClassic implements SumList {
          * Build a new worker.
          * 
          * @param list
-         *            the list to sum
+         *                 the list to sum
          * @param startpos
-         *            the initial position for this worker
+         *                 the initial position for this worker
          * @param nelem
-         *            the no. of elems to sum up for this worker
+         *                 the no. of elems to sum up for this worker
          */
         Worker(final List<Integer> list, final int startpos, final int nelem) {
             super();
@@ -76,7 +76,7 @@ public final class MultiThreadedListSumClassic implements SumList {
         /*
          * Start them
          */
-        for (final Worker w: workers) {
+        for (final Worker w : workers) {
             w.start();
         }
         /*
@@ -85,7 +85,7 @@ public final class MultiThreadedListSumClassic implements SumList {
          * futures.
          */
         long sum = 0;
-        for (final Worker w: workers) {
+        for (final Worker w : workers) {
             try {
                 w.join();
                 sum += w.getResult();

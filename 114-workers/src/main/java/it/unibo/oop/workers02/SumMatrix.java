@@ -13,5 +13,4 @@ public interface SumMatrix {
      * @return the sum of its elements
      */
     double sum(double[][] matrix);
-
 }
